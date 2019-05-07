@@ -1,0 +1,179 @@
+<template>
+    <div>
+        <local-head :alph_list="alph_list" @show="show_change"></local-head>
+        <local-list :con="con" :hot_list="hot_list" :alph_list="alph_list" :is_show="is_show"></local-list>
+        <local-alphabet @change="alph_change" :is_show="is_show"></local-alphabet>
+    </div>
+</template>
+
+<script>
+import LocalHead from '@/components/local/Local-Head.vue'
+import LocalList from '@/components/local/Local-List.vue'
+import LocalAlphabet from '@/components/local/Local-Alphabet.vue'
+export default {
+    data(){
+        return {
+            con:"",
+            is_show:"",
+            // 热门城市列表
+            hot_list:[
+                {id:1,name:"北京"},
+                {id:2,name:"上海"},
+                {id:3,name:"广州"},
+                {id:4,name:"深圳"},
+                {id:5,name:"杭州"},
+            ],
+            // 字母城市表
+            alph_list:{
+                "A":[
+                    {id:1,pinyin:"anqing",name:"安庆"},
+                    {id:2,pinyin:"anyang",name:"安阳"},
+                    {id:3,pinyin:"aba",name:"阿坝"},
+                    {id:4,pinyin:"anshan",name:"鞍山"},
+                    {id:5,pinyin:"anshun",name:"安顺"},
+                    {id:6,pinyin:"ankang",name:"安康"},
+                    {id:7,pinyin:"akesu",name:"阿克苏"},
+                    {id:8,pinyin:"aletai",name:"阿勒泰"},
+                    {id:9,pinyin:"aomen",name:"澳门"},
+                ],
+                "B":[
+                    {id:1,pinyin:"beijing",name:"北京"},
+                    {id:2,pinyin:"beihai",name:"北海"},
+                    {id:3,pinyin:"baotou",name:"包头"},
+                    {id:4,pinyin:"baoding",name:"保定"},
+                    {id:5,pinyin:"bengbu",name:"蚌埠"},
+                    {id:6,pinyin:"binzhou",name:"滨州"},
+                    {id:7,pinyin:"baoji",name:"宝鸡"},
+                    {id:8,pinyin:"baoshan",name:"保山"},
+                    {id:9,pinyin:"haozhou",name:"毫州"},
+                    {id:10,pinyin:"baise",name:"百色"},
+                    {id:11,pinyin:"baishan",name:"白山"},
+                    {id:12,pinyin:"benxi",name:"本溪"},
+                    {id:13,pinyin:"bayinguoleng",name:"巴音郭楞"},
+                    {id:14,pinyin:"bayannaoer",name:"巴彦淖尔"},
+                    {id:15,pinyin:"bazhong",name:"巴中"},
+                    {id:16,pinyin:"baoting",name:"保亭"},
+                    {id:17,pinyin:"bijie",name:"毕节"},
+                    {id:18,pinyin:"baiyin",name:"白银"},
+                ],
+                "C":[
+                    {id:1,pinyin:"chengdu",name:"成都"},
+                    {id:2,pinyin:"changsha",name:"长沙"},
+                    {id:3,pinyin:"chongqing",name:"重庆"},
+                    {id:4,pinyin:"changzhou",name:"常州"},
+                    {id:5,pinyin:"changchun",name:"长春"},
+                    {id:6,pinyin:"changbaishan",name:"长白山"},
+                    {id:7,pinyin:"chizhou",name:"池州"},
+                    {id:8,pinyin:"chengde",name:"承德"},
+                    {id:9,pinyin:"changde",name:"常德"},
+                    {id:10,pinyin:"chenzhou",name:"郴州"},
+                    {id:11,pinyin:"changzhi",name:"长治"},
+                    {id:12,pinyin:"cangzhou",name:"沧州"},
+                    {id:13,pinyin:"chuzhou",name:"滁州"},
+                    {id:14,pinyin:"chaohu",name:"巢湖"},
+                    {id:15,pinyin:"chaozhou",name:"潮州"},
+                    {id:16,pinyin:"songzuo",name:"嵩左"},
+                    {id:17,pinyin:"chuxiong",name:"楚雄"},
+                    {id:18,pinyin:"chifeng",name:"赤峰"},
+                    {id:19,pinyin:"chaoyang",name:"朝阳"},
+                    {id:20,pinyin:"changji",name:"昌吉"},
+                    {id:21,pinyin:"changdu",name:"昌都"},
+                    {id:22,pinyin:"changjiang",name:"昌江"},
+                    {id:23,pinyin:"chengmai",name:"澄迈"},
+                ],
+                "D":[
+                    {id:1,pinyin:"dalian",name:"大连"},
+                    {id:2,pinyin:"dongguan",name:"东莞"},
+                    {id:3,pinyin:"dali",name:"大理"},
+                    {id:4,pinyin:"datong",name:"大同"},
+                    {id:5,pinyin:"dandong",name:"丹东"},
+                    {id:6,pinyin:"dongying",name:"东营"},
+                    {id:7,pinyin:"deyang",name:"德阳"},
+                    {id:8,pinyin:"daqing",name:"大庆"},
+                    {id:9,pinyin:"diqing",name:"迪庆"},
+                    {id:10,pinyin:"dezhou",name:"德州"},
+                    {id:11,pinyin:"danzhou",name:"儋州"},
+                    {id:12,pinyin:"dehong",name:"德宏"},
+                    {id:13,pinyin:"daxinganling",name:"大兴安岭"},
+                    {id:14,pinyin:"dingan",name:"定安"},
+                    {id:15,pinyin:"dazhou",name:"达州"},
+                ],
+                "E":[
+                    {id:1,pinyin:"eerduosi",name:"鄂尔多斯"},
+                    {id:2,pinyin:"enshi",name:"恩施"},
+                    {id:3,pinyin:"ezhou",name:"鄂州"},
+                ],
+                "F":[
+                    {id:1,pinyin:"fuzhou",name:"福州"},
+                    {id:2,pinyin:"foshan",name:"佛山"},
+                    {id:3,pinyin:"fuyang",name:"阜阳"},
+                    {id:4,pinyin:"fangchenggang",name:"防城港"},
+                    {id:5,pinyin:"fushun",name:"抚顺"},
+                    {id:6,pinyin:"fuzhou",name:"抚州"},
+                ],
+                "G":[
+                    {id:1,pinyin:"guangzhou",name:"广州"},
+                    {id:2,pinyin:"guilin",name:"桂林"},
+                    {id:3,pinyin:"guiyang",name:"贵阳"},
+                    {id:4,pinyin:"ganzhou",name:"赣州"},
+                    {id:5,pinyin:"ganzi",name:"甘孜"},
+                    {id:6,pinyin:"guangyuan",name:"广元"},
+                    {id:7,pinyin:"guangan",name:"广安"},
+                    {id:8,pinyin:"guigang",name:"贵港"},
+                    {id:9,pinyin:"guyuan",name:"固原"},
+                ],
+                "H":[
+                    {id:1,pinyin:"hangzhou",name:"杭州"},
+                    {id:2,pinyin:"haerbin",name:"哈尔滨"},
+                    {id:3,pinyin:"hefei",name:"合肥"},
+                    {id:4,pinyin:"huangshan",name:"黄山"},
+                    {id:5,pinyin:"haikou",name:"海口"},
+                    {id:6,pinyin:"huhehaote",name:"呼和浩特"},
+                    {id:7,pinyin:"huaian",name:"淮安"},
+                    {id:8,pinyin:"huizhou",name:"惠州"},
+                    {id:9,pinyin:"huzhou",name:"湖州"},
+                    {id:10,pinyin:"hulunbeier",name:"呼伦贝尔"},
+                    {id:11,pinyin:"hengyang",name:"衡阳"},
+                    {id:12,pinyin:"heze",name:"菏泽"},
+                    {id:13,pinyin:"handan",name:"邯郸"},
+                    {id:14,pinyin:"heyuan",name:"河源"},
+                    {id:15,pinyin:"hanzhong",name:"汉中"},
+                    {id:16,pinyin:"huaihua",name:"怀化"},
+                    {id:17,pinyin:"huludao",name:"葫芦岛"},
+                    {id:18,pinyin:"hengshui",name:"衡水"},
+                    {id:19,pinyin:"huainan",name:"淮南"},
+                    {id:20,pinyin:"huangshi",name:"黄石"},
+                    {id:21,pinyin:"huanggang",name:"黄冈"},
+                    {id:22,pinyin:"haixi",name:"海西"},
+                    {id:23,pinyin:"hegang",name:"鹤岗"},
+                    {id:24,pinyin:"heihe",name:"黑河"},
+                    {id:25,pinyin:"hechi",name:"河池"},
+                    {id:26,pinyin:"huaibei",name:"淮北"},
+                    {id:27,pinyin:"hezhou",name:"贺州"},
+                    {id:28,pinyin:"hebi",name:"鹤壁"},
+                    {id:29,pinyin:"hetian",name:"和田"},
+                    {id:30,pinyin:"honghe",name:"红河"},
+                    {id:31,pinyin:"hainanzangzu",name:"海南藏族"},
+                ]
+            }
+        }
+    },
+    methods: {
+        alph_change(con){
+            this.con=con;
+        },
+        show_change(is_show){
+            this.is_show=is_show;
+        }
+    },
+    components:{
+        LocalHead,
+        LocalList,
+        LocalAlphabet,
+    }
+}
+</script>
+
+<style scoped>
+
+</style>
